@@ -80,7 +80,7 @@ def plot_mass_funcs(snap, part_type=None):
     ax.legend()
 
     if part_type is None:
-        fig.savefig("plots/mass_function_total_%s.png" % (part_type, snap),
+        fig.savefig("plots/mass_function_total_%s.png" % snap,
                     bbox_inches="tight")
     else:
         fig.savefig("plots/mass_function_PartType%d_%s.png" % (part_type, snap),
