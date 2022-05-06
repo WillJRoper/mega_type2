@@ -31,10 +31,19 @@ def plot_mass_funcs(snap, part_type=None):
         masses_dmo = hdf1["masses"][:] * 10 ** 10
         masses_dm = hdf2["masses"][:] * 10 ** 10
         masses_dmbary = hdf3["masses"][:] * 10 ** 10
+        sub_masses_dmo = hdf1["Subhalos"]["masses"][:] * 10 ** 10
+        sub_masses_dm = hdf2["Subhalos"]["masses"][:] * 10 ** 10
+        sub_masses_dmbary = hdf3["Subhalos"]["masses"][:] * 10 ** 10
     else:
         masses_dmo = hdf1["part_type_masses"][:, part_type] * 10 ** 10
         masses_dm = hdf2["part_type_masses"][:, part_type] * 10 ** 10
         masses_dmbary = hdf3["part_type_masses"][:, part_type] * 10 ** 10
+        sub_masses_dmo = hdf1["Subhalos"]["part_type_masses"][:,
+                                                              part_type] * 10 ** 10
+        sub_masses_dm = hdf2["Subhalos"]["part_type_masses"][:,
+                                                             part_type] * 10 ** 10
+        sub_masses_dmbary = hdf3["Subhalos"]["part_type_masses"][:,
+                                                                 part_type] * 10 ** 10
 
     hdf1.close()
     hdf2.close()
@@ -49,11 +58,17 @@ def plot_mass_funcs(snap, part_type=None):
     H_dmo, _ = np.histogram(masses_dmo, bins=bins)
     H_dm, _ = np.histogram(masses_dm, bins=bins)
     H_dmbary, _ = np.histogram(masses_dmbary, bins=bins)
+    sub_H_dmo, _ = np.histogram(sub_masses_dmo, bins=bins)
+    sub_H_dm, _ = np.histogram(sub_masses_dm, bins=bins)
+    sub_H_dmbary, _ = np.histogram(sub_masses_dmbary, bins=bins)
 
     # Convert units to per unit mass per volume
     phi_dmo = H_dmo / intervals / vol
     phi_dm = H_dm / intervals / vol
     phi_dmbary = H_dmbary / intervals / vol
+    sub_phi_dmo = sub_H_dmo / intervals / vol
+    sub_phi_dm = sub_H_dm / intervals / vol
+    sub_phi_dmbary = sub_H_dmbary / intervals / vol
 
     # Set up plot
     fig = plt.figure()
@@ -61,9 +76,15 @@ def plot_mass_funcs(snap, part_type=None):
     ax.loglog()
 
     # Plot curves
-    ax.plot(bin_cents, phi_dmo, label="DMO")
-    ax.plot(bin_cents, phi_dm, label="DM")
-    ax.plot(bin_cents, phi_dmbary, label="DM+Baryons")
+    ax.plot(bin_cents, phi_dmo, label="DMO", color="r")
+    ax.plot(bin_cents, phi_dm, label="DM", color="b")
+    ax.plot(bin_cents, phi_dmbary, label="DM+Baryons", color="o")
+    ax.plot(bin_cents, sub_phi_dmo, color="r", linestyle="--")
+    ax.plot(bin_cents, sub_phi_dm, color="b", linestyle="--")
+    ax.plot(bin_cents, sub_phi_dmbary, color="o", linestyle="--")
+    ax.plot(bin_cents, phi_dm, color="k", linestyle="-", alpha=0, label="Host")
+    ax.plot(bin_cents, sub_phi_dm, color="k", linestyle="--", alpha=0,
+            label="Subhalo")
 
     # Label axes
     if part_type is None:
