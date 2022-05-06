@@ -28,10 +28,9 @@ def plot_mass_funcs(snap, part_type=None):
 
     # Open total masses
     if part_type is None:
-        masses_dmo = hdf1["masses"][:, :] * 10 ** 10
-        masses_dm = hdf2["masses"][:, :] * 10 ** 10
-        masses_dmbary = np.sum(hdf3["part_type_masses"]
-                               [:, :], axis=0) * 10 ** 10
+        masses_dmo = hdf1["masses"][:] * 10 ** 10
+        masses_dm = hdf2["masses"][:] * 10 ** 10
+        masses_dmbary = hdf3["masses"][:] * 10 ** 10
     else:
         masses_dmo = hdf1["part_type_masses"][:, part_type] * 10 ** 10
         masses_dm = hdf2["part_type_masses"][:, part_type] * 10 ** 10
@@ -42,7 +41,7 @@ def plot_mass_funcs(snap, part_type=None):
     hdf3.close()
 
     # Define bins
-    bins = np.logspace(6, 16, 50)
+    bins = np.logspace(8, 16, 50)
     bin_cents = (bins[1:] + bins[:-1]) / 2
     intervals = bins[1:] - bins[:-1]
 
