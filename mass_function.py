@@ -82,9 +82,8 @@ def plot_mass_funcs(snap, part_type=None):
     ax.plot(bin_cents, sub_phi_dmo, color="r", linestyle="--")
     ax.plot(bin_cents, sub_phi_dm, color="b", linestyle="--")
     ax.plot(bin_cents, sub_phi_dmbary, color="g", linestyle="--")
-    ax.plot(bin_cents, phi_dm, color="k", linestyle="-", alpha=0, label="Host")
-    ax.plot(bin_cents, sub_phi_dm, color="k", linestyle="--", alpha=0,
-            label="Subhalo")
+    ax.plot([0, 1], [0, 1], color="k", linestyle="-", label="Host")
+    ax.plot([0, 1], [0, 1], color="k", linestyle="--", label="Subhalo")
 
     # Label axes
     if part_type is None:
@@ -96,6 +95,10 @@ def plot_mass_funcs(snap, part_type=None):
     else:
         print("No such part_type=%d" % part_type)
     ax.set_ylabel(r"$\phi / [\mathrm{Mpc}^{-3} M_\odot]$")
+
+    # Set limits
+    ax.set_xlims(10**8, 10**16)
+    ax.set_ylims(10**-19, 10**-9)
 
     # Draw legend
     ax.legend()
