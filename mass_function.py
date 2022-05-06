@@ -35,7 +35,7 @@ def plot_mass_funcs(snap, part_type=None):
     else:
         masses_dmo = hdf1["part_type_masses"][:, part_type] * 10 ** 10
         masses_dm = hdf2["part_type_masses"][:, part_type] * 10 ** 10
-        mases_dmbary = hdf3["part_type_masses"][:, part_type] * 10 ** 10
+        masses_dmbary = hdf3["part_type_masses"][:, part_type] * 10 ** 10
 
     hdf1.close()
     hdf2.close()
