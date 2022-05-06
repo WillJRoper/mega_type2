@@ -97,8 +97,8 @@ def plot_mass_funcs(snap, part_type=None):
     ax.set_ylabel(r"$\phi / [\mathrm{Mpc}^{-3} M_\odot]$")
 
     # Set limits
-    ax.set_xlims(10**8, 10**16)
-    ax.set_ylims(10**-19, 10**-9)
+    ax.set_xlim(10**8, 10**16)
+    ax.set_ylim(10**-19, 10**-9)
 
     # Draw legend
     ax.legend()
