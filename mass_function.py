@@ -69,7 +69,7 @@ def plot_mass_funcs(snap, part_type=None):
     elif part_type == 0:
         ax.set_xlabel(r"$M_{\mathrm{gas}}/M_\odot$")
     else:
-        print("No such part_type=%d" % d part_type)
+        print("No such part_type=%d" % part_type)
     ax.set_ylabel(r"$\phi / [\mathrm{Mpc}^{-3} M_\odot]$")
 
     # Draw legend
@@ -85,6 +85,6 @@ def plot_mass_funcs(snap, part_type=None):
 
 
 if __name__ == "__main__":
-    plot_mass_funcs("0000", part_type=None)
-    plot_mass_funcs("0000", part_type=1)
-    plot_mass_funcs("0000", part_type=0)
+    plot_mass_funcs("0098", part_type=None)
+    plot_mass_funcs("0098", part_type=1)
+    plot_mass_funcs("0098", part_type=0)
