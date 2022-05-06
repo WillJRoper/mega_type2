@@ -30,8 +30,8 @@ def plot_mass_funcs(snap, part_type=None):
     if part_type is None:
         masses_dmo = np.sum(hdf1["part_type_masses"][:, :], axis=0) * 10 ** 10
         masses_dm = np.sum(hdf2["part_type_masses"][:, :], axis=0) * 10 ** 10
-        mases_dmbary = np.sum(hdf3["part_type_masses"]
-                              [:, :], axis=0) * 10 ** 10
+        masses_dmbary = np.sum(hdf3["part_type_masses"]
+                               [:, :], axis=0) * 10 ** 10
     else:
         masses_dmo = hdf1["part_type_masses"][:, part_type] * 10 ** 10
         masses_dm = hdf2["part_type_masses"][:, part_type] * 10 ** 10
