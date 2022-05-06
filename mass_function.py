@@ -98,7 +98,7 @@ def plot_mass_funcs(snap, part_type=None):
 
     # Set limits
     ax.set_xlim(10**8, 10**16)
-    ax.set_ylim(10**-19, 10**-9)
+    ax.set_ylim(10**-19.5, 10**-10)
 
     # Draw legend
     ax.legend()
