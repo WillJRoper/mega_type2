@@ -38,12 +38,12 @@ def plot_mass_funcs(snap, part_type=None):
         masses_dmo = hdf1["part_type_masses"][:, part_type] * 10 ** 10
         masses_dm = hdf2["part_type_masses"][:, part_type] * 10 ** 10
         masses_dmbary = hdf3["part_type_masses"][:, part_type] * 10 ** 10
-        sub_masses_dmo = hdf1["Subhalos"]["part_type_masses"][:,
-                                                              part_type] * 10 ** 10
-        sub_masses_dm = hdf2["Subhalos"]["part_type_masses"][:,
-                                                             part_type] * 10 ** 10
-        sub_masses_dmbary = hdf3["Subhalos"]["part_type_masses"][:,
-                                                                 part_type] * 10 ** 10
+        sub_masses_dmo = hdf1["Subhalos"][
+            "part_type_masses"][:, part_type] * 10 ** 10
+        sub_masses_dm = hdf2["Subhalos"][
+            "part_type_masses"][:, part_type] * 10 ** 10
+        sub_masses_dmbary = hdf3["Subhalos"][
+            "part_type_masses"][:, part_type] * 10 ** 10
 
     hdf1.close()
     hdf2.close()
@@ -78,10 +78,10 @@ def plot_mass_funcs(snap, part_type=None):
     # Plot curves
     ax.plot(bin_cents, phi_dmo, label="DMO", color="r")
     ax.plot(bin_cents, phi_dm, label="DM", color="b")
-    ax.plot(bin_cents, phi_dmbary, label="DM+Baryons", color="o")
+    ax.plot(bin_cents, phi_dmbary, label="DM+Baryons", color="g")
     ax.plot(bin_cents, sub_phi_dmo, color="r", linestyle="--")
     ax.plot(bin_cents, sub_phi_dm, color="b", linestyle="--")
-    ax.plot(bin_cents, sub_phi_dmbary, color="o", linestyle="--")
+    ax.plot(bin_cents, sub_phi_dmbary, color="g", linestyle="--")
     ax.plot(bin_cents, phi_dm, color="k", linestyle="-", alpha=0, label="Host")
     ax.plot(bin_cents, sub_phi_dm, color="k", linestyle="--", alpha=0,
             label="Subhalo")
@@ -104,7 +104,8 @@ def plot_mass_funcs(snap, part_type=None):
         fig.savefig("plots/mass_function_total_%s.png" % snap,
                     bbox_inches="tight")
     else:
-        fig.savefig("plots/mass_function_PartType%d_%s.png" % (part_type, snap),
+        fig.savefig("plots/mass_function_PartType%d_%s.png" % (part_type,
+                                                               snap),
                     bbox_inches="tight")
     plt.close(fig)
 
