@@ -37,6 +37,10 @@ def plot_mass_funcs(snap, part_type=None):
         masses_dm = hdf2["part_type_masses"][:, part_type] * 10 ** 10
         mases_dmbary = hdf3["part_type_masses"][:, part_type] * 10 ** 10
 
+    hdf1.close()
+    hdf2.close()
+    hdf3.close()
+
     # Define bins
     bins = np.logspace(6, 16, 50)
     bin_cents = (bins[1:] + bins[:-1]) / 2
