@@ -44,7 +44,7 @@ def plot_mass_funcs(snap, part_type=None):
     # Define bins
     bins = np.logspace(6, 16, 50)
     bin_cents = (bins[1:] + bins[:-1]) / 2
-    intervals = bins[:1] - bins[:-1]
+    intervals = bins[1:] - bins[:-1]
 
     # Histogram masses
     H_dmo, _ = np.histogram(masses_dmo, bins=bins)
@@ -59,6 +59,7 @@ def plot_mass_funcs(snap, part_type=None):
     # Set up plot
     fig = plt.figure()
     ax = fig.add_subplot()
+    ax.loglog()
 
     # Plot curves
     ax.plot(bin_cents, phi_dmo, label="DMO")
