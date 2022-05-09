@@ -76,12 +76,20 @@ def plot_mass_funcs(snap, part_type=None):
     ax.loglog()
 
     # Plot curves
-    ax.plot(bin_cents, phi_dmo, label="DMO", color="r")
-    ax.plot(bin_cents, phi_dm, label="DM", color="b")
-    ax.plot(bin_cents, phi_dmbary, label="DM+Baryons", color="g")
-    ax.plot(bin_cents, sub_phi_dmo, color="r", linestyle="--")
-    ax.plot(bin_cents, sub_phi_dm, color="b", linestyle="--")
-    ax.plot(bin_cents, sub_phi_dmbary, color="g", linestyle="--")
+    okinds = phi_dmo > 0
+    ax.plot(bin_cents[okinds], phi_dmo[okinds], label="DMO", color="r")
+    okinds = phi_dm > 0
+    ax.plot(bin_cents[okinds], phi_dm[okinds], label="DM", color="b")
+    okinds = phi_dmbary > 0
+    ax.plot(bin_cents[okinds], phi_dmbary[okinds],
+            label="DM+Baryons", color="g")
+    okinds = sub_phi_dmo > 0
+    ax.plot(bin_cents[okinds], sub_phi_dmo[okinds], color="r", linestyle="--")
+    okinds = sub_phi_dm > 0
+    ax.plot(bin_cents[okinds], sub_phi_dm[okinds], color="b", linestyle="--")
+    okinds = sub_phi_dmbary > 0
+    ax.plot(bin_cents[okinds], sub_phi_dmbary[okinds],
+            color="g", linestyle="--")
     ax.plot([0, 1], [0, 1], color="k", linestyle="-", label="Host")
     ax.plot([0, 1], [0, 1], color="k", linestyle="--", label="Subhalo")
 
