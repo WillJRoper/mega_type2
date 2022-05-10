@@ -43,15 +43,16 @@ def plot_mass_funcs(snap, part_type=None):
         sub_masses_dm = hdf2["Subhalos"]["masses"][sub_reals2] * 10 ** 10
         sub_masses_dmbary = hdf3["Subhalos"]["masses"][sub_reals3] * 10 ** 10
     else:
-        masses_dmo = hdf1["part_type_masses"][reals1, part_type] * 10 ** 10
-        masses_dm = hdf2["part_type_masses"][reals2, part_type] * 10 ** 10
-        masses_dmbary = hdf3["part_type_masses"][reals3, part_type] * 10 ** 10
+        masses_dmo = hdf1["part_type_masses"][:, part_type][reals1] * 10 ** 10
+        masses_dm = hdf2["part_type_masses"][:, part_type][reals2] * 10 ** 10
+        masses_dmbary = hdf3["part_type_masses"][:,
+                                                 part_type][reals3] * 10 ** 10
         sub_masses_dmo = hdf1["Subhalos"][
-            "part_type_masses"][sub_reals1, part_type] * 10 ** 10
+            "part_type_masses"][:, part_type][reals1] * 10 ** 10
         sub_masses_dm = hdf2["Subhalos"][
-            "part_type_masses"][sub_reals2, part_type] * 10 ** 10
+            "part_type_masses"][:, part_type][reals2] * 10 ** 10
         sub_masses_dmbary = hdf3["Subhalos"][
-            "part_type_masses"][sub_reals3, part_type] * 10 ** 10
+            "part_type_masses"][:, part_type][reals3] * 10 ** 10
 
     hdf1.close()
     hdf2.close()
