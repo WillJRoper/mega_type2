@@ -164,6 +164,7 @@ def main_branch_length():
             npart = nparts_dmo[98]
             real = reals_dmo[98]
             l = l_dmo
+            print(l)
         elif lab == "DM":
             npart = nparts_dm[98]
             real = reals_dm[98]
