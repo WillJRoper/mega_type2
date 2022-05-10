@@ -157,7 +157,7 @@ def main_branch_length():
     ax3 = fig.add_subplot(gs[2, 0])
 
     # Loop over simulations
-    for lab in ["DMO", "DM", "DM+Baryons"]:
+    for lab, c in zip(["DMO", "DM", "DM+Baryons"], ["r", "b", "g"]):
 
         # Define varibales for plotting
         if lab == "DMO":
@@ -185,7 +185,7 @@ def main_branch_length():
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
-            ax.plot(bin_edges[:-1] + 0.5, H, label=lab)
+            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
@@ -217,6 +217,8 @@ def main_branch_length():
     ax1.set_ylim(0.5, None)
     ax2.set_ylim(0.5, None)
 
+    ax.legend()
+
     # Save figure with a transparent background
     fig.savefig('plots/mainbranchlengthcomp.png', bbox_inches="tight")
     plt.close(fig)
@@ -230,7 +232,8 @@ def main_branch_length():
     ax3 = fig.add_subplot(gs[2, 0])
 
     # Loop over simulations
-    for lab in ["DMO", "DM", "DM+Baryons"]:
+    for lab, c in zip(["DMO", "DM", "DM+Baryons"],
+                      ["r", "b", "g"]):
 
         # Define varibales for plotting
         if lab == "DMO":
@@ -258,7 +261,7 @@ def main_branch_length():
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
-            ax.plot(bin_edges[:-1] + 0.5, H, label=lab)
+            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
@@ -289,6 +292,8 @@ def main_branch_length():
     # avoid tick stacking
     ax1.set_ylim(0.5, None)
     ax2.set_ylim(0.5, None)
+
+    ax1.legend()
 
     # Save figure with a transparent background
     fig.savefig('plots/sub_mainbranchlengthcomp.png', bbox_inches="tight")
