@@ -26,24 +26,32 @@ def plot_mass_funcs(snap, part_type=None):
     l = hdf1.attrs["boxsize"]
     vol = l[0] * l[1] * l[2]
 
+    # Extract the realness flags
+    reals1 = hdf1["real_flag"][...]
+    reals2 = hdf2["real_flag"][...]
+    reals3 = hdf3["real_flag"][...]
+    sub_reals1 = hdf1["Subhalos"]["real_flag"][...]
+    sub_reals2 = hdf2["Subhalos"]["real_flag"][...]
+    sub_reals3 = hdf3["Subhalos"]["real_flag"][...]
+
     # Open total masses
     if part_type is None:
-        masses_dmo = hdf1["masses"][:] * 10 ** 10
-        masses_dm = hdf2["masses"][:] * 10 ** 10
-        masses_dmbary = hdf3["masses"][:] * 10 ** 10
-        sub_masses_dmo = hdf1["Subhalos"]["masses"][:] * 10 ** 10
-        sub_masses_dm = hdf2["Subhalos"]["masses"][:] * 10 ** 10
-        sub_masses_dmbary = hdf3["Subhalos"]["masses"][:] * 10 ** 10
+        masses_dmo = hdf1["masses"][reals1] * 10 ** 10
+        masses_dm = hdf2["masses"][reals2] * 10 ** 10
+        masses_dmbary = hdf3["masses"][reals3] * 10 ** 10
+        sub_masses_dmo = hdf1["Subhalos"]["masses"][sub_reals1] * 10 ** 10
+        sub_masses_dm = hdf2["Subhalos"]["masses"][sub_reals2] * 10 ** 10
+        sub_masses_dmbary = hdf3["Subhalos"]["masses"][sub_reals3] * 10 ** 10
     else:
-        masses_dmo = hdf1["part_type_masses"][:, part_type] * 10 ** 10
-        masses_dm = hdf2["part_type_masses"][:, part_type] * 10 ** 10
-        masses_dmbary = hdf3["part_type_masses"][:, part_type] * 10 ** 10
+        masses_dmo = hdf1["part_type_masses"][reals1, part_type] * 10 ** 10
+        masses_dm = hdf2["part_type_masses"][reals2, part_type] * 10 ** 10
+        masses_dmbary = hdf3["part_type_masses"][reals3, part_type] * 10 ** 10
         sub_masses_dmo = hdf1["Subhalos"][
-            "part_type_masses"][:, part_type] * 10 ** 10
+            "part_type_masses"][sub_reals1, part_type] * 10 ** 10
         sub_masses_dm = hdf2["Subhalos"][
-            "part_type_masses"][:, part_type] * 10 ** 10
+            "part_type_masses"][sub_reals2, part_type] * 10 ** 10
         sub_masses_dmbary = hdf3["Subhalos"][
-            "part_type_masses"][:, part_type] * 10 ** 10
+            "part_type_masses"][sub_reals3, part_type] * 10 ** 10
 
     hdf1.close()
     hdf2.close()
