@@ -121,13 +121,17 @@ def plot_link():
     sub_desc_H_dmbary, _ = np.histogram(sub_descs_dmbary, bins=bins)
 
     # Set up plot
-    fig = plt.figure()
+    fig = plt.figure(figsize=(3.5, 6))
     gs = gridspec.GridSpec(nrows=2, ncols=1)
     gs.update(wspace=0.0, hspace=0.0)
     ax = fig.add_subplot(gs[0, 0])
     ax1 = fig.add_subplot(gs[1, 0])
     ax.semilogy()
     ax1.semilogy()
+
+    # Remove the unused x axis
+    ax.tick_params("x", top=False, bottom=False, labeltop=False,
+                   labelbottom=False)
 
     # Plot curves
     ax.plot(bin_cents, prog_H_dmo, label="DMO", color="r")
