@@ -66,12 +66,12 @@ def plot_link():
             hdf3 = h5py.File(sub_file3, "r")
 
             # Open total progs
-            nprogs["DMO"][snap] = hdf1["nProgs"][:]
-            nprogs["DM"][snap] = hdf2["nProgs"][:]
-            nprogs["DM+Baryons"][snap] = hdf3["nProgs"][:]
-            ndescs["DMO"][snap] = hdf1["nDescs"][:]
-            ndescs["DM"][snap] = hdf2["nDescs"][:]
-            ndescs["DM+Baryons"][snap] = hdf3["nDescs"][:]
+            sub_nprogs["DMO"][snap] = hdf1["nProgs"][:]
+            sub_nprogs["DM"][snap] = hdf2["nProgs"][:]
+            sub_nprogs["DM+Baryons"][snap] = hdf3["nProgs"][:]
+            sub_ndescs["DMO"][snap] = hdf1["nDescs"][:]
+            sub_ndescs["DM"][snap] = hdf2["nDescs"][:]
+            sub_ndescs["DM+Baryons"][snap] = hdf3["nDescs"][:]
 
             hdf1.close()
             hdf2.close()
@@ -82,19 +82,19 @@ def plot_link():
             continue
 
     # Combine into total arrays over all time
-    progs_dmo = list(nprogs["DMO"].values())
-    progs_dm = list(nprogs["DM"].values())
-    progs_dmbary = list(nprogs["DM+Baryons"].values())
-    descs_dmo = list(ndescs["DMO"].values())
-    descs_dm = list(ndescs["DM"].values())
-    descs_dmbary = list(ndescs["DM+Baryons"].values())
+    progs_dmo = np.concatenate(list(nprogs["DMO"].values()))
+    progs_dm = np.concatenate(list(nprogs["DM"].values()))
+    progs_dmbary = np.concatenate(list(nprogs["DM+Baryons"].values()))
+    descs_dmo = np.concatenate(list(ndescs["DMO"].values()))
+    descs_dm = np.concatenate(list(ndescs["DM"].values()))
+    descs_dmbary = np.concatenate(list(ndescs["DM+Baryons"].values()))
 
-    progs_dmo = list(sub_nprogs["DMO"].values())
-    progs_dm = list(sub_nprogs["DM"].values())
-    progs_dmbary = list(sub_nprogs["DM+Baryons"].values())
-    descs_dmo = list(sub_ndescs["DMO"].values())
-    descs_dm = list(sub_ndescs["DM"].values())
-    descs_dmbary = list(sub_ndescs["DM+Baryons"].values())
+    sub_progs_dmo = np.concatenate(list(sub_nprogs["DMO"].values()))
+    sub_progs_dm = np.concatenate(list(sub_nprogs["DM"].values()))
+    sub_progs_dmbary = np.concatenate(list(sub_nprogs["DM+Baryons"].values()))
+    sub_descs_dmo = np.concatenate(list(sub_ndescs["DMO"].values()))
+    sub_descs_dm = np.concatenate(list(sub_ndescs["DM"].values()))
+    sub_descs_dmbary = np.concatenate(list(sub_ndescs["DM+Baryons"].values()))
 
     # Get maximum number of links
     link_max = np.max((progs_dmo, progs_dm, progs_dmbary,
