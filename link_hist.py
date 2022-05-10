@@ -49,12 +49,15 @@ def plot_link():
             hdf3 = h5py.File(file3, "r")
 
             # Open total progs
-            nprogs["DMO"][snap] = hdf1["nProgs"][:]
-            nprogs["DM"][snap] = hdf2["nProgs"][:]
-            nprogs["DM+Baryons"][snap] = hdf3["nProgs"][:]
-            ndescs["DMO"][snap] = hdf1["nDescs"][:]
-            ndescs["DM"][snap] = hdf2["nDescs"][:]
-            ndescs["DM+Baryons"][snap] = hdf3["nDescs"][:]
+            reals1 = hdf1["real_flag"][...]
+            reals2 = hdf2["real_flag"][...]
+            reals3 = hdf3["real_flag"][...]
+            nprogs["DMO"][snap] = hdf1["nProgs"][reals1]
+            nprogs["DM"][snap] = hdf2["nProgs"][reals2]
+            nprogs["DM+Baryons"][snap] = hdf3["nProgs"][reals3]
+            ndescs["DMO"][snap] = hdf1["nDescs"][reals1]
+            ndescs["DM"][snap] = hdf2["nDescs"][reals2]
+            ndescs["DM+Baryons"][snap] = hdf3["nDescs"][reals3]
 
             hdf1.close()
             hdf2.close()
@@ -66,12 +69,15 @@ def plot_link():
             hdf3 = h5py.File(sub_file3, "r")
 
             # Open total progs
-            sub_nprogs["DMO"][snap] = hdf1["nProgs"][:]
-            sub_nprogs["DM"][snap] = hdf2["nProgs"][:]
-            sub_nprogs["DM+Baryons"][snap] = hdf3["nProgs"][:]
-            sub_ndescs["DMO"][snap] = hdf1["nDescs"][:]
-            sub_ndescs["DM"][snap] = hdf2["nDescs"][:]
-            sub_ndescs["DM+Baryons"][snap] = hdf3["nDescs"][:]
+            reals1 = hdf1["real_flag"][...]
+            reals2 = hdf2["real_flag"][...]
+            reals3 = hdf3["real_flag"][...]
+            sub_nprogs["DMO"][snap] = hdf1["nProgs"][reals1]
+            sub_nprogs["DM"][snap] = hdf2["nProgs"][reals2]
+            sub_nprogs["DM+Baryons"][snap] = hdf3["nProgs"][reals3]
+            sub_ndescs["DMO"][snap] = hdf1["nDescs"][reals1]
+            sub_ndescs["DM"][snap] = hdf2["nDescs"][reals2]
+            sub_ndescs["DM+Baryons"][snap] = hdf3["nDescs"][reals3]
 
             hdf1.close()
             hdf2.close()
