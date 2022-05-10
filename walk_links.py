@@ -51,7 +51,7 @@ def get_data(snaps, ini_filepath):
                                 prog_start_index >= 0)
         progs[key][okinds] = hdf["Prog_haloIDs"][...][prog_start_index[okinds]]
         print(prog_start_index[okinds].size, "halos after applying booleans")
-        print(prog_start_index)
+        print(prog_start_index[okinds])
         okinds = np.logical_and(desc_start_index < 2 ** 30,
                                 desc_start_index >= 0)
         descs[key][okinds] = hdf["Desc_haloIDs"][...][desc_start_index[okinds]]
@@ -72,7 +72,7 @@ def get_main_branch_lengths(reals, nparts, progs, descs):
     # Loop over halos at z0 (snap 0098)
     for ihalo in range(nhalo):
 
-        print("Walking main branch of halo %d (of %d)" % (ihalo, nhalo))
+        # print("Walking main branch of halo %d (of %d)" % (ihalo, nhalo))
 
         # Initialise looping variables
         prog = ihalo
