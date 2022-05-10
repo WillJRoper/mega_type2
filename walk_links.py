@@ -26,7 +26,7 @@ def get_data(snaps, ini_filepath):
 
         # Define this snapshots file string
         filepath = ini_filepath.replace("0098", snap)
-
+        print(filepath)
         # Define dict key
         key = int(snap)
 
@@ -79,6 +79,8 @@ def get_main_branch_lengths(reals, nparts, progs, descs):
         # Loop until there is no progenitor (prog == -1)
         while prog != -1 and snap >= 0:
 
+            print(ihalo, prog, snap)
+
             # Increment length
             lengths[ihalo] += 1
 
@@ -124,8 +126,8 @@ def main_branch_length():
 
     # Walk mian branches measuring lengths
     print("Walking DMO Hosts")
-    l_dmo = get_main_branch_lengths(
-        reals_dmo, nparts_dmo, progs_dmo, descs_dmo)
+    l_dmo = get_main_branch_lengths(reals_dmo, nparts_dmo, progs_dmo,
+                                    descs_dmo)
     print("Walking DM Hosts")
     l_dm = get_main_branch_lengths(reals_dm, nparts_dm, progs_dm, descs_dm)
     print("Walking DM+Baryon Hosts")
