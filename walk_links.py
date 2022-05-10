@@ -62,7 +62,7 @@ def get_data(snaps, ini_filepath):
 def get_main_branch_lengths(reals, nparts, progs, descs):
 
     # How many halos?
-    nhalo = nparts["0098"].size
+    nhalo = nparts[98].size
 
     # Initialise array to store lengths
     lengths = np.zeros(nhalo, dtype=int)
