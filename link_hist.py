@@ -157,6 +157,18 @@ def plot_link():
     ax.plot([1000, 1001], [0, 1], color="k", linestyle="--",
             label="Subhalo")
 
+    # Label panels
+    ax.text(0.95, 0.1, 'Progenitors',
+            bbox=dict(boxstyle="round,pad=0.3", fc='w', ec="k", lw=1,
+                      alpha=0.8),
+            transform=ax.transAxes, horizontalalignment='right',
+            fontsize=8)
+    ax.text(0.95, 0.9, 'Descendants',
+            bbox=dict(boxstyle="round,pad=0.3", fc='w', ec="k", lw=1,
+                      alpha=0.8),
+            transform=ax.transAxes, horizontalalignment='right',
+            fontsize=8)
+
     # Label axes
     ax1.set_xlabel(r"$N_{\mathrm{link}}$")
     ax.set_ylabel(r"$N$")
