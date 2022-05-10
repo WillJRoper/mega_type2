@@ -166,7 +166,7 @@ def plot_link():
     ax1.text(0.95, 0.9, 'Descendants',
              bbox=dict(boxstyle="round,pad=0.3", fc='w', ec="k", lw=1,
                        alpha=0.8),
-             transform=ax.transAxes, horizontalalignment='right',
+             transform=ax1.transAxes, horizontalalignment='right',
              fontsize=8)
 
     # Label axes
