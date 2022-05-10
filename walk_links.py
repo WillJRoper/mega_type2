@@ -48,9 +48,9 @@ def get_data(snaps, ini_filepath):
         progs[key] = np.full(nparts[key].size, -1)
         descs[key] = np.full(nparts[key].size, -1)
         okinds = prog_start_index < 2 ** 30
-        progs[key][okinds] = hdf["Prog_haloIDs"][prog_start_index[okinds]]
+        progs[key][okinds] = hdf["Prog_haloIDs"][...][prog_start_index[okinds]]
         okinds = desc_start_index < 2 ** 30
-        descs[key][okinds] = hdf["Desc_haloIDs"][desc_start_index[okinds]]
+        descs[key][okinds] = hdf["Desc_haloIDs"][...][desc_start_index[okinds]]
 
         hdf.close()
 
