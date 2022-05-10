@@ -291,3 +291,7 @@ def main_branch_length():
     # Save figure with a transparent background
     fig.savefig('plots/sub_mainbranchlengthcomp.png', bbox_inches="tight")
     plt.close(fig)
+
+
+if __name__ == "__main__":
+    main_branch_length()
