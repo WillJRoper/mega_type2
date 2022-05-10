@@ -26,7 +26,7 @@ def get_data(snaps, ini_filepath):
 
         # Define this snapshots file string
         filepath = ini_filepath.replace("0098", snap)
-        print(filepath)
+
         # Define dict key
         key = int(snap)
 
@@ -50,6 +50,8 @@ def get_data(snaps, ini_filepath):
         okinds = np.logical_and(prog_start_index < 2 ** 30,
                                 prog_start_index >= 0)
         progs[key][okinds] = hdf["Prog_haloIDs"][...][prog_start_index[okinds]]
+        print(prog_start_index[okinds].size, "halos after applying booleans")
+        print(prog_start_index)
         okinds = np.logical_and(desc_start_index < 2 ** 30,
                                 desc_start_index >= 0)
         descs[key][okinds] = hdf["Desc_haloIDs"][...][desc_start_index[okinds]]
@@ -78,8 +80,6 @@ def get_main_branch_lengths(reals, nparts, progs, descs):
 
         # Loop until there is no progenitor (prog == -1)
         while prog != -1 and snap >= 0:
-
-            print(ihalo, prog, snap)
 
             # Increment length
             lengths[ihalo] += 1
