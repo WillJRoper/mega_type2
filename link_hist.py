@@ -138,14 +138,14 @@ def plot_link():
     ax.plot(bin_cents, prog_H_dm, label="DM", color="b")
     ax.plot(bin_cents, prog_H_dmbary,
             label="DM+Baryons", color="g")
-    ax.plot(bin_cents, desc_H_dmo, color="r", linestyle="--")
-    ax.plot(bin_cents, desc_H_dm, color="b", linestyle="--")
-    ax.plot(bin_cents, desc_H_dmbary,
+    ax.plot(bin_cents, sub_prog_H_dmo, color="r", linestyle="--")
+    ax.plot(bin_cents, sub_prog_H_dm, color="b", linestyle="--")
+    ax.plot(bin_cents, sub_prog_H_dmbary,
             color="g", linestyle="--")
 
-    ax1.plot(bin_cents, sub_prog_H_dmo, label="DMO", color="r")
-    ax1.plot(bin_cents, sub_prog_H_dm, label="DM", color="b")
-    ax1.plot(bin_cents, sub_prog_H_dmbary,
+    ax1.plot(bin_cents, desc_H_dmo, label="DMO", color="r")
+    ax1.plot(bin_cents, desc_H_dm, label="DM", color="b")
+    ax1.plot(bin_cents, desc_H_dmbary,
              label="DM+Baryons", color="g")
     ax1.plot(bin_cents, sub_desc_H_dmo, color="r", linestyle="--")
     ax1.plot(bin_cents, sub_desc_H_dm, color="b", linestyle="--")
@@ -153,9 +153,9 @@ def plot_link():
              color="g", linestyle="--")
 
     ax.plot([1000, 1001], [0, 1], color="k", linestyle="-",
-            label="Progenitor")
+            label="Host")
     ax.plot([1000, 1001], [0, 1], color="k", linestyle="--",
-            label="Descendant")
+            label="Subhalo")
 
     # Label axes
     ax1.set_xlabel(r"$N_{\mathrm{link}}$")
