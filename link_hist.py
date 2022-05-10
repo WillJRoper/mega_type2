@@ -97,10 +97,10 @@ def plot_link():
     sub_descs_dmbary = np.concatenate(list(sub_ndescs["DM+Baryons"].values()))
 
     # Get maximum number of links
-    link_max = np.max((progs_dmo, progs_dm, progs_dmbary,
-                       descs_dmo, descs_dm, descs_dmbary,
-                       sub_progs_dmo, sub_progs_dm, sub_progs_dmbary,
-                       sub_descs_dmo, sub_descs_dm, sub_descs_dmbary))
+    link_max = np.max(np.concatenate((progs_dmo, progs_dm, progs_dmbary,
+                                      descs_dmo, descs_dm, descs_dmbary,
+                                      sub_progs_dmo, sub_progs_dm, sub_progs_dmbary,
+                                      sub_descs_dmo, sub_descs_dm, sub_descs_dmbary)))
 
     # Define bins
     bins = np.arange(0, link_max + 1, 1)
