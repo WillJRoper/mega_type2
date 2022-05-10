@@ -109,39 +109,39 @@ def main_branch_length():
     # And get the data from these files
     print("Reading DMO Hosts")
     reals_dmo, nparts_dmo, progs_dmo, descs_dmo = get_data(snaps, ini_file1)
-    # print("Reading DM Hosts")
-    # reals_dm, nparts_dm, progs_dm, descs_dm = get_data(snaps, ini_file2)
-    # print("Reading DM+Baryon Hosts")
-    # (reals_dmbary, nparts_dmbary, progs_dmbary,
-    #  descs_dmbary) = get_data(snaps, ini_file3)
-    # print("Reading DMO Subhalos")
-    # (sub_reals_dmo, sub_nparts_dmo, sub_progs_dmo,
-    #  sub_descs_dmo) = get_data(snaps, sub_ini_file1)
-    # print("Reading DM Subhalos")
-    # (sub_reals_dm, sub_nparts_dm, sub_progs_dm,
-    #  sub_descs_dm) = get_data(snaps, sub_ini_file2)
-    # print("Reading DM+Baryon Subhalos")
-    # (sub_reals_dmbary, sub_nparts_dmbary, sub_progs_dmbary,
-    #  sub_descs_dmbary) = get_data(snaps, sub_ini_file3)
+    print("Reading DM Hosts")
+    reals_dm, nparts_dm, progs_dm, descs_dm = get_data(snaps, ini_file2)
+    print("Reading DM+Baryon Hosts")
+    (reals_dmbary, nparts_dmbary, progs_dmbary,
+     descs_dmbary) = get_data(snaps, ini_file3)
+    print("Reading DMO Subhalos")
+    (sub_reals_dmo, sub_nparts_dmo, sub_progs_dmo,
+     sub_descs_dmo) = get_data(snaps, sub_ini_file1)
+    print("Reading DM Subhalos")
+    (sub_reals_dm, sub_nparts_dm, sub_progs_dm,
+     sub_descs_dm) = get_data(snaps, sub_ini_file2)
+    print("Reading DM+Baryon Subhalos")
+    (sub_reals_dmbary, sub_nparts_dmbary, sub_progs_dmbary,
+     sub_descs_dmbary) = get_data(snaps, sub_ini_file3)
 
     # Walk mian branches measuring lengths
     print("Walking DMO Hosts")
     l_dmo = get_main_branch_lengths(reals_dmo, nparts_dmo, progs_dmo,
                                     descs_dmo)
-    # print("Walking DM Hosts")
-    # l_dm = get_main_branch_lengths(reals_dm, nparts_dm, progs_dm, descs_dm)
-    # print("Walking DM+Baryon Hosts")
-    # l_dmbary = get_main_branch_lengths(reals_dmbary, nparts_dmbary,
-    #                                    progs_dmbary, descs_dmbary)
-    # print("Walking DMO Subhalos")
-    # l_dmo_sub = get_main_branch_lengths(sub_reals_dmo, sub_nparts_dmo,
-    #                                     sub_progs_dmo, sub_descs_dmo)
-    # print("Walking DM Subhalos")
-    # l_dm_sub = get_main_branch_lengths(sub_reals_dm, sub_nparts_dm,
-    #                                    sub_progs_dm, sub_descs_dm)
-    # print("Walking DM+Baryon Subhalos")
-    # l_dmbary_sub = get_main_branch_lengths(sub_reals_dmbary, sub_nparts_dmbary,
-    #                                        sub_progs_dmbary, sub_descs_dmbary)
+    print("Walking DM Hosts")
+    l_dm = get_main_branch_lengths(reals_dm, nparts_dm, progs_dm, descs_dm)
+    print("Walking DM+Baryon Hosts")
+    l_dmbary = get_main_branch_lengths(reals_dmbary, nparts_dmbary,
+                                       progs_dmbary, descs_dmbary)
+    print("Walking DMO Subhalos")
+    l_dmo_sub = get_main_branch_lengths(sub_reals_dmo, sub_nparts_dmo,
+                                        sub_progs_dmo, sub_descs_dmo)
+    print("Walking DM Subhalos")
+    l_dm_sub = get_main_branch_lengths(sub_reals_dm, sub_nparts_dm,
+                                       sub_progs_dm, sub_descs_dm)
+    print("Walking DM+Baryon Subhalos")
+    l_dmbary_sub = get_main_branch_lengths(sub_reals_dmbary, sub_nparts_dmbary,
+                                           sub_progs_dmbary, sub_descs_dmbary)
 
     # Create lists of lower and upper mass thresholds for histograms
     low_threshs = [0, 100, 1000]
@@ -163,6 +163,7 @@ def main_branch_length():
 
         # Define varibales for plotting
         if lab == "DMO":
+            continue
             npart = nparts_dmo[98]
             real = reals_dmo[98]
             l = l_dmo
@@ -240,6 +241,7 @@ def main_branch_length():
 
         # Define varibales for plotting
         if lab == "DMO":
+            continue
             npart = sub_nparts_dmo[98]
             real = sub_reals_dmo[98]
             l = l_dmo_sub
