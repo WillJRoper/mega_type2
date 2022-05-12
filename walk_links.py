@@ -50,8 +50,6 @@ def get_data(snaps, ini_filepath):
         okinds = np.logical_and(prog_start_index < 2 ** 30,
                                 prog_start_index >= 0)
         progs[key][okinds] = hdf["Prog_haloIDs"][...][prog_start_index[okinds]]
-        print(prog_start_index[okinds].size, "halos after applying booleans")
-        print(prog_start_index[okinds])
         okinds = np.logical_and(desc_start_index < 2 ** 30,
                                 desc_start_index >= 0)
         descs[key][okinds] = hdf["Desc_haloIDs"][...][desc_start_index[okinds]]
@@ -163,7 +161,6 @@ def main_branch_length():
 
         # Define varibales for plotting
         if lab == "DMO":
-            continue
             npart = nparts_dmo[98]
             real = reals_dmo[98]
             l = l_dmo
@@ -241,7 +238,6 @@ def main_branch_length():
 
         # Define varibales for plotting
         if lab == "DMO":
-            continue
             npart = sub_nparts_dmo[98]
             real = sub_reals_dmo[98]
             l = l_dmo_sub
