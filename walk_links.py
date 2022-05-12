@@ -43,6 +43,8 @@ def get_data(snaps, ini_filepath):
         prog_start_index = hdf["prog_start_index"][...]
         desc_start_index = hdf["desc_start_index"][...]
 
+        print(snap, prog_start_index)
+
         # Extract the direct links
         # (these are stored in the start_index position)
         progs[key] = np.full(nparts[key].size, -1)
@@ -53,6 +55,8 @@ def get_data(snaps, ini_filepath):
         okinds = np.logical_and(desc_start_index < 2 ** 30,
                                 desc_start_index >= 0)
         descs[key][okinds] = hdf["Desc_haloIDs"][...][desc_start_index[okinds]]
+
+        print(snap, progs[key])
 
         hdf.close()
 
@@ -107,20 +111,20 @@ def main_branch_length():
     # And get the data from these files
     print("Reading DMO Hosts")
     reals_dmo, nparts_dmo, progs_dmo, descs_dmo = get_data(snaps, ini_file1)
-    print("Reading DM Hosts")
-    reals_dm, nparts_dm, progs_dm, descs_dm = get_data(snaps, ini_file2)
-    print("Reading DM+Baryon Hosts")
-    (reals_dmbary, nparts_dmbary, progs_dmbary,
-     descs_dmbary) = get_data(snaps, ini_file3)
-    print("Reading DMO Subhalos")
-    (sub_reals_dmo, sub_nparts_dmo, sub_progs_dmo,
-     sub_descs_dmo) = get_data(snaps, sub_ini_file1)
-    print("Reading DM Subhalos")
-    (sub_reals_dm, sub_nparts_dm, sub_progs_dm,
-     sub_descs_dm) = get_data(snaps, sub_ini_file2)
-    print("Reading DM+Baryon Subhalos")
-    (sub_reals_dmbary, sub_nparts_dmbary, sub_progs_dmbary,
-     sub_descs_dmbary) = get_data(snaps, sub_ini_file3)
+    # print("Reading DM Hosts")
+    # reals_dm, nparts_dm, progs_dm, descs_dm = get_data(snaps, ini_file2)
+    # print("Reading DM+Baryon Hosts")
+    # (reals_dmbary, nparts_dmbary, progs_dmbary,
+    #  descs_dmbary) = get_data(snaps, ini_file3)
+    # print("Reading DMO Subhalos")
+    # (sub_reals_dmo, sub_nparts_dmo, sub_progs_dmo,
+    #  sub_descs_dmo) = get_data(snaps, sub_ini_file1)
+    # print("Reading DM Subhalos")
+    # (sub_reals_dm, sub_nparts_dm, sub_progs_dm,
+    #  sub_descs_dm) = get_data(snaps, sub_ini_file2)
+    # print("Reading DM+Baryon Subhalos")
+    # (sub_reals_dmbary, sub_nparts_dmbary, sub_progs_dmbary,
+    #  sub_descs_dmbary) = get_data(snaps, sub_ini_file3)
 
     # Walk mian branches measuring lengths
     print("Walking DMO Hosts")
