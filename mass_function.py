@@ -131,6 +131,6 @@ def plot_mass_funcs(snap, part_type=None):
 
 
 if __name__ == "__main__":
-    plot_mass_funcs("0098", part_type=None)
-    plot_mass_funcs("0098", part_type=1)
-    plot_mass_funcs("0098", part_type=0)
+    plot_mass_funcs(sys.argv[1].split(".h")[0][-4:], part_type=None)
+    plot_mass_funcs(sys.argv[1].split(".h")[0][-4:], part_type=1)
+    plot_mass_funcs(sys.argv[1].split(".h")[0][-4:], part_type=0)
