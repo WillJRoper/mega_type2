@@ -266,11 +266,11 @@ def main_branch_length():
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
-            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H / ls.size, label=lab, color=c)
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
-    ax2.set_ylabel(r'$N$')
+    ax2.set_ylabel(r'$f$')
 
     # Annotate the mass bins
     ax1.text(0.05, 0.8, r'$M_{H}>1000$',
