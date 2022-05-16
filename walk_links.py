@@ -161,6 +161,7 @@ def main_branch_length():
     ax3 = fig.add_subplot(gs[2, 0])
 
     # Loop over simulations
+    prev_max = 0
     for lab, c in zip(["DMO", "DM", "DM+Baryons"], ["r", "b", "g"]):
 
         # Define varibales for plotting
@@ -192,7 +193,10 @@ def main_branch_length():
 
             ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
-            ax.set_ylim(0.1, np.max(H) + 0.1 * np.max(H))
+            H_max = np.max(H)
+            if H_max > prev_max:
+                ax.set_ylim(0.1, H_max + 0.1 * H_max)
+            prev_max = H_max
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
@@ -219,12 +223,6 @@ def main_branch_length():
     ax1.tick_params(axis='x', bottom=False, left=False)
     ax2.tick_params(axis='x', bottom=False, left=False)
 
-    # Set y axis limits such that 0 is removed from the upper two subplots to
-    # avoid tick stacking
-    ax1.set_ylim(None, 1.1)
-    ax2.set_ylim(None, 1.1)
-    ax3.set_ylim(None, 1.1)
-
     ax3.legend(loc='upper center',
                bbox_to_anchor=(0.5, -0.35),
                fancybox=True, ncol=3)
@@ -242,6 +240,7 @@ def main_branch_length():
     ax3 = fig.add_subplot(gs[2, 0])
 
     # Loop over simulations
+    prev_max = 0
     for lab, c in zip(["DMO", "DM", "DM+Baryons"],
                       ["r", "b", "g"]):
 
@@ -273,7 +272,10 @@ def main_branch_length():
 
             ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
-            ax.set_ylim(0.1, np.max(H) + 0.1 * np.max(H))
+            H_max = np.max(H)
+            if H_max > prev_max:
+                ax.set_ylim(0.1, H_max + 0.1 * H_max)
+            prev_max = H_max
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
