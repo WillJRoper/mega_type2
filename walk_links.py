@@ -219,8 +219,8 @@ def main_branch_length():
 
     # Set y axis limits such that 0 is removed from the upper two subplots to
     # avoid tick stacking
-    ax1.set_ylim(0., 1.0)
-    ax2.set_ylim(0., 1.0)
+    ax1.set_ylim(0.001, None)
+    ax2.set_ylim(0.001, None)
 
     ax.legend()
 
@@ -295,8 +295,8 @@ def main_branch_length():
 
     # Set y axis limits such that 0 is removed from the upper two subplots to
     # avoid tick stacking
-    ax1.set_ylim(0, 1.0)
-    ax2.set_ylim(0, 1.0)
+    ax1.set_ylim(0.001, None)
+    ax2.set_ylim(0.001, None)
 
     ax1.legend()
 
