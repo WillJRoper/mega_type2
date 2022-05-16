@@ -163,6 +163,8 @@ def main_branch_length():
     # Loop over simulations
     for lab, c in zip(["DMO", "DM", "DM+Baryons"], ["r", "b", "g"]):
 
+        ax.semilogy()
+
         # Define varibales for plotting
         if lab == "DMO":
             npart = nparts_dmo[98]
@@ -197,17 +199,17 @@ def main_branch_length():
     ax2.set_ylabel(r'$N$')
 
     # Annotate the mass bins
-    ax1.text(0.05, 0.8, r'$M_{H}>1000$',
+    ax1.text(0.05, 0.8, r'$N_{p}>1000$',
              bbox=dict(boxstyle="round,pad=0.3", fc='w',
                        ec="k", lw=1, alpha=0.8),
              transform=ax1.transAxes,
              horizontalalignment='left')
-    ax2.text(0.05, 0.8, r'$1000\geq M_{H}>100$',
+    ax2.text(0.05, 0.8, r'$1000\geq N_{p}>100$',
              bbox=dict(boxstyle="round,pad=0.3", fc='w',
                        ec="k", lw=1, alpha=0.8),
              transform=ax2.transAxes,
              horizontalalignment='left')
-    ax3.text(0.05, 0.8, r'$100\geq M_{H}>20$',
+    ax3.text(0.05, 0.8, r'$100\geq N_{p}>20$',
              bbox=dict(boxstyle="round,pad=0.3", fc='w',
                        ec="k", lw=1, alpha=0.8),
              transform=ax3.transAxes,
@@ -219,10 +221,12 @@ def main_branch_length():
 
     # Set y axis limits such that 0 is removed from the upper two subplots to
     # avoid tick stacking
-    ax1.set_ylim(0.001, None)
-    ax2.set_ylim(0.001, None)
+    # ax1.set_ylim(0.001, None)
+    # ax2.set_ylim(0.001, None)
 
-    ax.legend()
+    ax3.legend(loc='upper center',
+               bbox_to_anchor=(0.5, -0.3),
+               fancybox=True, ncol=3)
 
     # Save figure with a transparent background
     fig.savefig('plots/mainbranchlengthcomp.png', bbox_inches="tight")
@@ -239,6 +243,8 @@ def main_branch_length():
     # Loop over simulations
     for lab, c in zip(["DMO", "DM", "DM+Baryons"],
                       ["r", "b", "g"]):
+
+        ax.semilogy()
 
         # Define varibales for plotting
         if lab == "DMO":
@@ -273,17 +279,17 @@ def main_branch_length():
     ax2.set_ylabel(r'$f$')
 
     # Annotate the mass bins
-    ax1.text(0.05, 0.8, r'$M_{H}>1000$',
+    ax1.text(0.05, 0.8, r'$N_{p}>1000$',
              bbox=dict(boxstyle="round,pad=0.3", fc='w',
                        ec="k", lw=1, alpha=0.8),
              transform=ax1.transAxes,
              horizontalalignment='left')
-    ax2.text(0.05, 0.8, r'$1000\geq M_{H}>100$',
+    ax2.text(0.05, 0.8, r'$1000\geq N_{p}>100$',
              bbox=dict(boxstyle="round,pad=0.3", fc='w',
                        ec="k", lw=1, alpha=0.8),
              transform=ax2.transAxes,
              horizontalalignment='left')
-    ax3.text(0.05, 0.8, r'$100\geq M_{H}>20$',
+    ax3.text(0.05, 0.8, r'$100\geq N_{p}>20$',
              bbox=dict(boxstyle="round,pad=0.3", fc='w',
                        ec="k", lw=1, alpha=0.8),
              transform=ax3.transAxes,
@@ -295,10 +301,12 @@ def main_branch_length():
 
     # Set y axis limits such that 0 is removed from the upper two subplots to
     # avoid tick stacking
-    ax1.set_ylim(0.001, None)
-    ax2.set_ylim(0.001, None)
+    # ax1.set_ylim(0.001, None)
+    # ax2.set_ylim(0.001, None)
 
-    ax1.legend()
+    ax3.legend(loc='upper center',
+               bbox_to_anchor=(0.5, -0.3),
+               fancybox=True, ncol=3)
 
     # Save figure with a transparent background
     fig.savefig('plots/sub_mainbranchlengthcomp.png', bbox_inches="tight")
