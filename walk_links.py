@@ -274,7 +274,7 @@ def main_branch_length():
 
             H_max = np.max(H)
             if H_max > prev_max:
-                ax.set_ylim(0.1, H_max + 0.1 * H_max)
+                ax.set_ylim(0.5, H_max + (0.2 * H_max))
             prev_max = H_max
 
     # Label axes
