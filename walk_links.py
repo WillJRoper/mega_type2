@@ -161,7 +161,7 @@ def main_branch_length():
     ax3 = fig.add_subplot(gs[2, 0])
 
     # Loop over simulations
-    prev_max = 0
+    prev_max = [0, 0, 0]
     for lab, c in zip(["DMO", "DM", "DM+Baryons"], ["r", "b", "g"]):
 
         # Define varibales for plotting
@@ -182,7 +182,8 @@ def main_branch_length():
             print("Something is very wrong")
             break
 
-        for ax, low, up in zip([ax3, ax2, ax1], low_threshs, up_threshs):
+        for (i, ax), low, up in zip(enumerate([ax3, ax2, ax1]),
+                                    low_threshs, up_threshs):
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
@@ -194,9 +195,9 @@ def main_branch_length():
             ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
             H_max = np.max(H)
-            if H_max > prev_max:
-                ax.set_ylim(0.1, H_max + 0.1 * H_max)
-            prev_max = H_max
+            if H_max > prev_max[i]:
+                ax.set_ylim(0.5, H_max + (0.1 * H_max))
+            prev_max[i] = H_max
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
@@ -240,7 +241,7 @@ def main_branch_length():
     ax3 = fig.add_subplot(gs[2, 0])
 
     # Loop over simulations
-    prev_max = 0
+    prev_max = [0, 0, 0]
     for lab, c in zip(["DMO", "DM", "DM+Baryons"],
                       ["r", "b", "g"]):
 
@@ -261,7 +262,8 @@ def main_branch_length():
             print("Something is very wrong")
             break
 
-        for ax, low, up in zip([ax3, ax2, ax1], low_threshs, up_threshs):
+        for (i, ax), low, up in zip(enumerate([ax3, ax2, ax1]),
+                                    low_threshs, up_threshs):
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
@@ -273,9 +275,9 @@ def main_branch_length():
             ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
             H_max = np.max(H)
-            if H_max > prev_max:
-                ax.set_ylim(0.5, H_max + (0.2 * H_max))
-            prev_max = H_max
+            if H_max > prev_max[i]:
+                ax.set_ylim(0.5, H_max + (0.1 * H_max))
+            prev_max[i] = H_max
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
