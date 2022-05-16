@@ -163,8 +163,6 @@ def main_branch_length():
     # Loop over simulations
     for lab, c in zip(["DMO", "DM", "DM+Baryons"], ["r", "b", "g"]):
 
-        ax.semilogy()
-
         # Define varibales for plotting
         if lab == "DMO":
             npart = nparts_dmo[98]
@@ -184,6 +182,8 @@ def main_branch_length():
             break
 
         for ax, low, up in zip([ax3, ax2, ax1], low_threshs, up_threshs):
+
+            ax.semilogy()
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
@@ -244,8 +244,6 @@ def main_branch_length():
     for lab, c in zip(["DMO", "DM", "DM+Baryons"],
                       ["r", "b", "g"]):
 
-        ax.semilogy()
-
         # Define varibales for plotting
         if lab == "DMO":
             npart = sub_nparts_dmo[98]
@@ -264,6 +262,8 @@ def main_branch_length():
             break
 
         for ax, low, up in zip([ax3, ax2, ax1], low_threshs, up_threshs):
+
+            ax.semilogy()
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
