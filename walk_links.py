@@ -190,7 +190,7 @@ def main_branch_length():
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
-            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H / ls.size, label=lab, color=c)
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
@@ -219,8 +219,8 @@ def main_branch_length():
 
     # Set y axis limits such that 0 is removed from the upper two subplots to
     # avoid tick stacking
-    ax1.set_ylim(0.5, None)
-    ax2.set_ylim(0.5, None)
+    ax1.set_ylim(0., 1.0)
+    ax2.set_ylim(0., 1.0)
 
     ax.legend()
 
@@ -295,8 +295,8 @@ def main_branch_length():
 
     # Set y axis limits such that 0 is removed from the upper two subplots to
     # avoid tick stacking
-    ax1.set_ylim(0.5, None)
-    ax2.set_ylim(0.5, None)
+    ax1.set_ylim(0, 1.0)
+    ax2.set_ylim(0, 1.0)
 
     ax1.legend()
 
