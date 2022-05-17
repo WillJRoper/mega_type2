@@ -11,7 +11,7 @@ import seaborn as sns
 sns.set_style("whitegrid")
 
 
-def get_data(snaps, ini_filepath):
+def get_data(snaps, filepath, level):
 
     # Set up dictionaries to store direct progenitors and descendants
     reals = {}
@@ -19,31 +19,35 @@ def get_data(snaps, ini_filepath):
     progs = {}
     descs = {}
 
+    # Open files
+    hdf = h5py.File(filepath, "r")
+
+    # Open the correct group
+    if level == 1:
+        grp = hdf["Subhalos"]
+    else:
+        grp = hdf
+
     # Loop over snapshots
     for snap in snaps:
 
         print("Extracting data for snap %s" % snap)
 
-        # Define this snapshots file string
-        filepath = ini_filepath.replace("0098", snap)
+        # Open snapshot group
+        snap_grp = grp[snap]
 
         # Define dict key
         key = int(snap)
 
-        # Open files
-        hdf = h5py.File(filepath, "r")
-
         # Extract the realness flags
-        reals[key] = hdf["real_flag"][...]
+        reals[key] = snap_grp["real_flag"][...]
 
         # Extract nparts
-        nparts[key] = hdf["nparts"][...]
+        nparts[key] = snap_grp["nparts"][...]
 
         # Extract the start indices for each halo
-        prog_start_index = hdf["prog_start_index"][...]
-        desc_start_index = hdf["desc_start_index"][...]
-
-        print(snap, prog_start_index)
+        prog_start_index = snap_grp["prog_start_index"][...]
+        desc_start_index = snap_grp["desc_start_index"][...]
 
         # Extract the direct links
         # (these are stored in the start_index position)
@@ -51,10 +55,12 @@ def get_data(snaps, ini_filepath):
         descs[key] = np.full(nparts[key].size, -1)
         okinds = np.logical_and(prog_start_index < 2 ** 30,
                                 prog_start_index >= 0)
-        progs[key][okinds] = hdf["Prog_haloIDs"][...][prog_start_index[okinds]]
+        progs[key][okinds] = snap_grp["Prog_haloIDs"][...][
+            prog_start_index[okinds]]
         okinds = np.logical_and(desc_start_index < 2 ** 30,
                                 desc_start_index >= 0)
-        descs[key][okinds] = hdf["Desc_haloIDs"][...][desc_start_index[okinds]]
+        descs[key][okinds] = snap_grp["Desc_haloIDs"][...][
+            desc_start_index[okinds]]
 
         print(snap, progs[key])
 
@@ -101,30 +107,28 @@ def main_branch_length():
     snaps = np.loadtxt("../graphs/L0100N0285_DMO/snaplist.txt", dtype=str)
 
     # Lets get the file paths
-    ini_file1 = sys.argv[1]
-    ini_file2 = sys.argv[2]
-    ini_file3 = sys.argv[3]
-    sub_ini_file1 = sys.argv[4]
-    sub_ini_file2 = sys.argv[5]
-    sub_ini_file3 = sys.argv[6]
+    file1 = sys.argv[1]
+    file2 = sys.argv[2]
+    file3 = sys.argv[3]
 
     # And get the data from these files
     print("Reading DMO Hosts")
-    reals_dmo, nparts_dmo, progs_dmo, descs_dmo = get_data(snaps, ini_file1)
+    reals_dmo, nparts_dmo, progs_dmo, descs_dmo = get_data(snaps, file1,
+                                                           level=0)
     print("Reading DM Hosts")
-    reals_dm, nparts_dm, progs_dm, descs_dm = get_data(snaps, ini_file2)
+    reals_dm, nparts_dm, progs_dm, descs_dm = get_data(snaps, file2, level=0)
     print("Reading DM+Baryon Hosts")
     (reals_dmbary, nparts_dmbary, progs_dmbary,
-     descs_dmbary) = get_data(snaps, ini_file3)
+     descs_dmbary) = get_data(snaps, file3, level=0)
     print("Reading DMO Subhalos")
     (sub_reals_dmo, sub_nparts_dmo, sub_progs_dmo,
-     sub_descs_dmo) = get_data(snaps, sub_ini_file1)
+     sub_descs_dmo) = get_data(snaps, file1, level=1)
     print("Reading DM Subhalos")
     (sub_reals_dm, sub_nparts_dm, sub_progs_dm,
-     sub_descs_dm) = get_data(snaps, sub_ini_file2)
+     sub_descs_dm) = get_data(snaps, file2, level=1)
     print("Reading DM+Baryon Subhalos")
     (sub_reals_dmbary, sub_nparts_dmbary, sub_progs_dmbary,
-     sub_descs_dmbary) = get_data(snaps, sub_ini_file3)
+     sub_descs_dmbary) = get_data(snaps, file3, level=1)
 
     # Walk mian branches measuring lengths
     print("Walking DMO Hosts")
