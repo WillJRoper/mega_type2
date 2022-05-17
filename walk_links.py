@@ -499,8 +499,8 @@ def persist_length():
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
-            okinds = np.logical_and(dis_okinds, okinds)
             not_okinds = np.logical_and(~dis_okinds, okinds)
+            okinds = np.logical_and(dis_okinds, okinds)
             ls = l[okinds]
 
             # Remove halos that make it full distance
@@ -591,8 +591,8 @@ def persist_length():
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
-            okinds = np.logical_and(dis_okinds, okinds)
             not_okinds = np.logical_and(~dis_okinds, okinds)
+            okinds = np.logical_and(dis_okinds, okinds)
             ls = l[okinds]
 
             # Remove halos that make it full distance
