@@ -616,3 +616,4 @@ def persist_length():
 
 if __name__ == "__main__":
     main_branch_length()
+    persist_length()
