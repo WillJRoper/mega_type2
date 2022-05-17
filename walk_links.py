@@ -61,7 +61,7 @@ def get_data(snaps, filepath, level):
 
         print(snap, progs[key])
 
-        hdf.close()
+    hdf.close()
 
     return reals, nparts, progs, descs
 
