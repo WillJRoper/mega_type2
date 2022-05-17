@@ -21,12 +21,6 @@ def get_data(snaps, filepath, level):
 
     # Open files
     hdf = h5py.File(filepath, "r")
-    print(hdf.keys())
-    # Open the correct group
-    if level == 1:
-        grp = hdf["Subhalos"]
-    else:
-        grp = hdf
 
     # Loop over snapshots
     for snap in snaps:
@@ -34,7 +28,10 @@ def get_data(snaps, filepath, level):
         print("Extracting data for snap %s" % snap)
 
         # Open snapshot group
-        snap_grp = grp[snap]
+        if level == 0:
+            snap_grp = hdf[snap]
+        else:
+            snap_grp = hdf[snap]["Subhalos"]
 
         # Define dict key
         key = int(snap)
