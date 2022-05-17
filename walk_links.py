@@ -489,7 +489,7 @@ def persist_length():
 
         # Remove halos that make it full distance
         okinds = l > 0
-        print("Percentage of Subhalos lost in %s: %d"
+        print("Percentage of Hosts lost in %s: %d"
               % (lab, l[okinds].size / l[~okinds].size * 100) + "%")
         l = l[okinds]
         npart = npart[okinds]
