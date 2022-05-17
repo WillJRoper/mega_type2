@@ -487,10 +487,15 @@ def persist_length():
             print("Something is very wrong")
             break
 
+        # Remove halos that make it full distance
+        okinds = l > 0
+        print("Percentage of Subhalos lost in %s: %d"
+              % (lab, l[okinds].size / l[~okinds].size * 100) + "%")
+        l = l[okinds]
+        npart = npart[okinds]
+
         for (i, ax), low, up in zip(enumerate([ax3, ax2, ax1]),
                                     low_threshs, up_threshs):
-
-            ax.semilogy()
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
@@ -565,10 +570,15 @@ def persist_length():
             print("Something is very wrong")
             break
 
+        # Remove halos that make it full distance
+        okinds = l > 0
+        print("Percentage of Subhalos lost in %s: %d"
+              % (lab, l[okinds].size / l[~okinds].size * 100) + "%")
+        l = l[okinds]
+        npart = npart[okinds]
+
         for (i, ax), low, up in zip(enumerate([ax3, ax2, ax1]),
                                     low_threshs, up_threshs):
-
-            ax.semilogy()
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
