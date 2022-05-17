@@ -121,8 +121,8 @@ def get_persist_lengths(reals, nparts, progs, descs):
         # Loop over halos in the current snapshot
         for ihalo in range(len(descs[root_snap])):
 
-            print("Walking main branch of halo %d in snap %s (of %d)"
-                  % (ihalo, str(root_snap).zfill(4), len(descs[root_snap])))
+            # print("Walking main branch of halo %d in snap %s (of %d)"
+            #       % (ihalo, str(root_snap).zfill(4), len(descs[root_snap])))
 
             # Skip if this halo is not real
             if not reals[root_snap][ihalo]:
@@ -568,7 +568,6 @@ def persist_length():
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
-            okinds = np.logical_and(okinds, real)
             ls = l[okinds]
 
             H, _ = np.histogram(ls, bins=bin_edges)
