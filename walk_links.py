@@ -104,7 +104,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
     done_halos = set()
 
     # Define the full length (initially nsnapshot + 1 long)
-    full_length = 100
+    full_length = 101
 
     # Initialise array to store lengths
     root_snaps = []
@@ -490,6 +490,8 @@ def persist_length():
         for (i, ax), low, up in zip(enumerate([ax3, ax2, ax1]),
                                     low_threshs, up_threshs):
 
+            ax.semilogy()
+
             okinds = np.logical_and(npart >= low,
                                     npart < up)
             ls = l[okinds]
@@ -565,6 +567,8 @@ def persist_length():
 
         for (i, ax), low, up in zip(enumerate([ax3, ax2, ax1]),
                                     low_threshs, up_threshs):
+
+            ax.semilogy()
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
