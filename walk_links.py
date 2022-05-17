@@ -488,18 +488,27 @@ def persist_length():
             break
 
         # Remove halos that make it full distance
-        okinds = l > 0
-        print("Percentage of Hosts lost in %s: %d"
-              % (lab, l[okinds].size / l[~okinds].size * 100) + "%")
-        l = l[okinds]
-        npart = npart[okinds]
+        dis_okinds = l > 0
+        print("Percentage of Hosts lost in %s: %d "
+              "(persist=%d, disappear=%d)"
+              % (lab, l[dis_okinds].size / l.size * 100,
+                 l[~dis_okinds].size, l[dis_okinds].size))
 
         for (i, ax), low, up in zip(enumerate([ax3, ax2, ax1]),
                                     low_threshs, up_threshs):
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
+            okinds = np.logical_and(dis_okinds, okinds)
+            not_okinds = np.logical_and(~dis_okinds, okinds)
             ls = l[okinds]
+
+            # Remove halos that make it full distance
+            print("Percentage of Hosts lost in %s (%d < N < %d): "
+                  "%d (persist=%d, disappear=%d)"
+                  % (lab, low, up, l[okinds].size / (l[okinds].size
+                                                     + l[not_okinds].size) * 100,
+                     l[not_okinds].size, l[okinds].size))
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
@@ -571,18 +580,27 @@ def persist_length():
             break
 
         # Remove halos that make it full distance
-        okinds = l > 0
-        print("Percentage of Subhalos lost in %s: %d"
-              % (lab, l[okinds].size / l[~okinds].size * 100) + "%")
-        l = l[okinds]
-        npart = npart[okinds]
+        dis_okinds = l > 0
+        print("Percentage of Subhalos lost in %s: %d "
+              "(persist=%d, disappear=%d)"
+              % (lab, l[dis_okinds].size / l.size * 100,
+                 l[~dis_okinds].size, l[dis_okinds].size))
 
         for (i, ax), low, up in zip(enumerate([ax3, ax2, ax1]),
                                     low_threshs, up_threshs):
 
             okinds = np.logical_and(npart >= low,
                                     npart < up)
+            okinds = np.logical_and(dis_okinds, okinds)
+            not_okinds = np.logical_and(~dis_okinds, okinds)
             ls = l[okinds]
+
+            # Remove halos that make it full distance
+            print("Percentage of Subhalos lost in %s (%d < N < %d): "
+                  "%d (persist=%d, disappear=%d)"
+                  % (lab, low, up, l[okinds].size / (l[okinds].size
+                                                     + l[not_okinds].size) * 100,
+                     l[not_okinds].size, l[okinds].size))
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
