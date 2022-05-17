@@ -21,7 +21,7 @@ def get_data(snaps, filepath, level):
 
     # Open files
     hdf = h5py.File(filepath, "r")
-    print(snap, hdf.keys())
+    print(hdf.keys())
     # Open the correct group
     if level == 1:
         grp = hdf["Subhalos"]
