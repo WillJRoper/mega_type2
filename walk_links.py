@@ -147,7 +147,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
 
             # Loop until there is no descendant (desc == -1)
             # or we reach the present day
-            while desc != -1 and snap < 99:
+            while desc != -1:
 
                 # Increment length
                 length += 1
