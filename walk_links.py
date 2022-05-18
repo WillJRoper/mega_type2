@@ -175,7 +175,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
                       "%d in root_snap %s with length %d, plength=%d"
                       % (prev_halo, str(snap - 1).zfill(4), ihalo,
                          str(root_snap).zfill(4), length,
-                         (99 - root_snap) - length > 0))
+                         (99 - root_snap) - length))
 
             # Appended this halos persistence length
             root_snaps.append(root_snap)
