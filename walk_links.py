@@ -159,14 +159,14 @@ def get_persist_lengths(reals, nparts, progs, descs):
                 done_halos.update({(snap, desc), })
 
                 # Get this halos direct progenitor
-                ihalo = desc
+                prev_halo = desc
                 desc = descs[snap][desc]
 
                 # Decement snapshot
                 snap += 1
 
             if npart >= 500 and (99 - root_snap) - length > 0:
-                print("Anomalous halo %d in snap %s" % (ihalo,
+                print("Anomalous halo %d in snap %s" % (prev_halo,
                                                         str(snap
                                                             - 1).zfill(4)))
 
