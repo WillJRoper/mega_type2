@@ -171,9 +171,8 @@ def get_persist_lengths(reals, nparts, progs, descs):
                 snap += 1
 
             if npart >= 500 and (99 - root_snap) - length > 0:
-                print("Anomalous halo %d in snap %s" % (prev_halo,
-                                                        str(snap
-                                                            - 1).zfill(4)))
+                print("Anomalous halo %d in snap %s walking from halo %d with length %d"
+                      % (prev_halo, str(snap - 1).zfill(4), ihalo, length))
 
             # Appended this halos persistence length
             root_snaps.append(root_snap)
