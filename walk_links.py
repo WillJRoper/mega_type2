@@ -658,9 +658,9 @@ def persist_length():
     fig = plt.figure()
     gs = gridspec.GridSpec(nrows=1, ncols=3)
     gs.update(wspace=0.0, hspace=0.0)
-    ax1 = fig.add_subplot(gs[0, 1])
+    ax1 = fig.add_subplot(gs[0, 0])
     ax2 = fig.add_subplot(gs[0, 1])
-    ax3 = fig.add_subplot(gs[0, 1])
+    ax3 = fig.add_subplot(gs[0, 2)
 
     # Loop over simulations
     max_lim = 0
