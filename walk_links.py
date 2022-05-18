@@ -730,7 +730,7 @@ def persist_length():
     ax3.tick_params("y", left=False, right=False, labelleft=False,
                     labelright=False)
 
-    cbar = fig.colobar(im)
+    cbar = fig.colorbar(im)
     cbar.set_label(r"$\bar{\ell}_{p}$")
 
     # Save figure with a transparent background
