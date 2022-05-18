@@ -159,10 +159,16 @@ def get_persist_lengths(reals, nparts, progs, descs):
                 done_halos.update({(snap, desc), })
 
                 # Get this halos direct progenitor
+                ihalo = desc
                 desc = descs[snap][desc]
 
                 # Decement snapshot
                 snap += 1
+
+            if npart >= 500 and (100 - root_snap) - length > 0:
+                print("Anomalous halo %d in snap %s" % (ihalo,
+                                                        str(snap
+                                                            - 1).zfill(4)))
 
             # Appended this halos persistence length
             root_snaps.append(root_snap)
@@ -694,7 +700,7 @@ def persist_length():
         # Plot the hexbin in this panel
         im = ax.hexbin(n_max, n_dis, gridsize=50, mincnt=1, C=l,
                        reduce_C_function=np.mean, linewidths=0.2,
-                       norm=norm, cmap="magma")
+                       norm=norm, cmap="magma", extent=[0, 2000, 0, 750])
 
         # Label x axis
         ax.set_xlabel(r"$N_{\mathrm{peak}}$")
@@ -721,8 +727,8 @@ def persist_length():
 
     # Set ax limits
     for ax in [ax1, ax2, ax3]:
-        ax.set_xlim(min_lim, max_lim)
-        ax.set_ylim(min_lim, max_lim)
+        ax.set_xlim(0, 2000)
+        ax.set_ylim(0, 750)
 
     # Remove unrequired axes
     ax2.tick_params("y", left=False, right=False, labelleft=False,
@@ -777,7 +783,7 @@ def persist_length():
         # Plot the hexbin in this panel
         im = ax.hexbin(n_max, n_dis, gridsize=50, mincnt=1, C=l,
                        reduce_C_function=np.mean, linewidths=0.2,
-                       norm=norm, cmap="magma")
+                       norm=norm, cmap="magma", extent=[0, 4000, 0, 2500])
 
         # Label x axis
         ax.set_xlabel(r"$N_{\mathrm{peak}}$")
@@ -804,8 +810,8 @@ def persist_length():
 
     # Set ax limits
     for ax in [ax1, ax2, ax3]:
-        ax.set_xlim(min_lim, max_lim)
-        ax.set_ylim(min_lim, max_lim)
+        ax.set_xlim(0, 4000)
+        ax.set_ylim(0, 2500)
 
     # Remove unrequired axes
     ax2.tick_params("y", left=False, right=False, labelleft=False,
