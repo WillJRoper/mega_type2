@@ -136,7 +136,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
                 continue
 
             # Skip if this halo has already appeared in a main branch
-            if done_halos[snap][ihalo]:
+            if done_halos[root_snap][ihalo]:
                 continue
 
             # Initialise looping variables
