@@ -4,6 +4,7 @@ import h5py
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
+from matplotlib.colors import Normalize
 import seaborn as sns
 
 
@@ -110,6 +111,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
     root_snaps = []
     lengths = []
     max_nparts = []
+    dis_nparts = []
     max_snaps = []
 
     # Loop over snapshots
@@ -145,9 +147,12 @@ def get_persist_lengths(reals, nparts, progs, descs):
                 # Increment length
                 length += 1
 
+                # Assign this halos npart
+                npart = nparts[snap][desc]
+
                 # Get max npart
-                if nparts[snap][desc] > max_npart:
-                    max_npart = nparts[snap][desc]
+                if npart > max_npart:
+                    max_npart = npart
                     max_snap = snap
 
                 # Include this halo in done halos
@@ -163,6 +168,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
             root_snaps.append(root_snap)
             lengths.append(length)
             max_nparts.append(max_npart)
+            dis_nparts.append(npart)
             max_snaps.append(max_snap)
 
     # Convert to arrays
@@ -171,7 +177,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
     max_nparts = np.array(max_nparts)
     max_snaps = np.array(max_snaps)
 
-    return root_snaps, lengths, max_nparts, max_snaps
+    return root_snaps, lengths, max_nparts, max_snaps, dis_nparts
 
 
 def main_branch_length():
@@ -424,35 +430,35 @@ def persist_length():
 
     # Walk mian branches measuring lengths
     print("Walking DMO Hosts")
-    root_dmo, l_dmo, n_dmo, max_s_dmo = get_persist_lengths(reals_dmo,
-                                                            nparts_dmo,
-                                                            progs_dmo,
-                                                            descs_dmo)
+    root_dmo, l_dmo, n_dmo, max_s_dmo, dis_n_dmo = get_persist_lengths(reals_dmo,
+                                                                       nparts_dmo,
+                                                                       progs_dmo,
+                                                                       descs_dmo)
     print("Walking DM Hosts")
-    root_dm, l_dm, n_dm, max_s_dm = get_persist_lengths(reals_dm,
-                                                        nparts_dm,
-                                                        progs_dm,
-                                                        descs_dm)
+    root_dm, l_dm, n_dm, max_s_dm, dis_n_dm = get_persist_lengths(reals_dm,
+                                                                  nparts_dm,
+                                                                  progs_dm,
+                                                                  descs_dm)
     print("Walking DM+Baryon Hosts")
     (root_dmbary, l_dmbary, n_dmbary,
-     max_s_dmbary) = get_persist_lengths(reals_dmbary, nparts_dmbary,
-                                         progs_dmbary, descs_dmbary)
+     max_s_dmbary, dis_n_dmbary) = get_persist_lengths(reals_dmbary, nparts_dmbary,
+                                                       progs_dmbary, descs_dmbary)
     print("Walking DMO Subhalos")
     (root_dmo_sub, l_dmo_sub,
-     n_dmo_sub, max_s_dmo_sub) = get_persist_lengths(sub_reals_dmo,
-                                                     sub_nparts_dmo,
-                                                     sub_progs_dmo,
-                                                     sub_descs_dmo)
+     n_dmo_sub, max_s_dmo_sub, dis_n_dmo_sub) = get_persist_lengths(sub_reals_dmo,
+                                                                    sub_nparts_dmo,
+                                                                    sub_progs_dmo,
+                                                                    sub_descs_dmo)
     print("Walking DM Subhalos")
     (root_dm_sub, l_dm_sub,
-     n_dm_sub, max_s_dm_sub) = get_persist_lengths(sub_reals_dm, sub_nparts_dm,
-                                                   sub_progs_dm, sub_descs_dm)
+     n_dm_sub, max_s_dm_sub, dis_n_dm_sub) = get_persist_lengths(sub_reals_dm, sub_nparts_dm,
+                                                                 sub_progs_dm, sub_descs_dm)
     print("Walking DM+Baryon Subhalos")
     (root_dmbary_sub, l_dmbary_sub,
-     n_dmbary_sub, max_s_dmbary_sub) = get_persist_lengths(sub_reals_dmbary,
-                                                           sub_nparts_dmbary,
-                                                           sub_progs_dmbary,
-                                                           sub_descs_dmbary)
+     n_dmbary_sub, max_s_dmbary_sub, dis_n_dmbary_sub) = get_persist_lengths(sub_reals_dmbary,
+                                                                             sub_nparts_dmbary,
+                                                                             sub_progs_dmbary,
+                                                                             sub_descs_dmbary)
 
     # Create lists of lower and upper mass thresholds for histograms
     low_threshs = [0, 100, 1000]
@@ -642,6 +648,175 @@ def persist_length():
 
     # Save figure with a transparent background
     fig.savefig('plots/sub_persistlengthcomp.png', bbox_inches="tight")
+    plt.close(fig)
+
+    # Define colormap normalisation
+    norm = Normalize(vmin=1, vmax=90)
+
+    # Set up plot
+    fig = plt.figure()
+    gs = gridspec.GridSpec(nrows=1, ncols=3)
+    gs.update(wspace=0.0, hspace=0.0)
+    ax1 = fig.add_subplot(gs[0, 1])
+    ax2 = fig.add_subplot(gs[0, 1])
+    ax3 = fig.add_subplot(gs[0, 1])
+
+    # Loop over simulations
+    max_lim = 0
+    min_lim = np.inf
+    for lab, ax, c in zip(["DMO", "DM", "DM+Baryons"], [ax1, ax2, ax3],
+                          ["r", "b", "g"]):
+
+        # Define varibales for plotting
+        if lab == "DMO":
+            n_max = n_dmo
+            n_dis = dis_n_dmo
+            l = (nsnaps - root_dmo) - l_dmo
+        elif lab == "DM":
+            n_max = n_dm
+            n_dis = dis_n_dm
+            l = (nsnaps - root_dm) - l_dm
+        elif lab == "DM+Baryons":
+            n_max = n_dmbary
+            n_dis = dis_n_dmbary
+            l = (nsnaps - root_dmbary) - l_dmbary
+        else:
+            print("Something is very wrong")
+            break
+
+        # Remove halos that persist
+        okinds = l > 0
+        n_max = n_max[okinds]
+        n_dis = n_dis[okinds]
+        l = l[okinds]
+
+        # Plot the hexbin in this panel
+        im = ax.hexbin(n_max, n_dis, gridsize=50, mincnt=1, C=l,
+                       reduce_C_function=np.mean, linewidths=0.2,
+                       norm=norm, cmap="magma")
+
+        # Label x axis
+        ax.set_xlabel(r"$N_{\mathrm{peak}}$")
+
+        # Label panel
+        ax.text(0.05, 0.8, lab,
+                bbox=dict(boxstyle="round,pad=0.3", fc='w',
+                          ec="k", lw=1, alpha=0.8),
+                transform=ax.transAxes,
+                horizontalalignment='left')
+
+        # Get limits
+        if ax.get_xlim()[0] < min_lim:
+            min_lim = ax.get_xlim()[0]
+        if ax.get_ylim()[0] < min_lim:
+            min_lim = ax.get_ylim()[0]
+        if ax.get_xlim()[1] > max_lim:
+            max_lim = ax.get_xlim()[1]
+        if ax.get_ylim()[1] > max_lim:
+            max_lim = ax.get_ylim()[1]
+
+    # Set y label
+    ax1.set_ylabel(r"$N_{\mathrm{dis}}$")
+
+    # Set ax limits
+    for ax in [ax1, ax2, ax3]:
+        ax.set_xlim(min_lim, max_lim)
+        ax.set_ylim(min_lim, max_lim)
+
+    # Remove unrequired axes
+    ax2.tick_params("y", left=False, right=False, labelleft=False,
+                    labelright=False)
+    ax3.tick_params("y", left=False, right=False, labelleft=False,
+                    labelright=False)
+
+    cbar = fig.colobar(im)
+    cbar.set_label(r"$\bar{\ell}_{p}$")
+
+    # Save figure with a transparent background
+    fig.savefig('plots/disappear_mass.png', bbox_inches="tight")
+    plt.close(fig)
+
+    # Set up plot
+    fig = plt.figure()
+    gs = gridspec.GridSpec(nrows=1, ncols=3)
+    gs.update(wspace=0.0, hspace=0.0)
+    ax1 = fig.add_subplot(gs[0, 1])
+    ax2 = fig.add_subplot(gs[0, 1])
+    ax3 = fig.add_subplot(gs[0, 1])
+
+    # Loop over simulations
+    max_lim = 0
+    min_lim = np.inf
+    for lab, ax, c in zip(["DMO", "DM", "DM+Baryons"], [ax1, ax2, ax3],
+                          ["r", "b", "g"]):
+
+        # Define varibales for plotting
+        if lab == "DMO":
+            n_max = n_dmo_sub
+            n_dis = dis_n_dmo_sub
+            l = (nsnaps - root_dmo_sub) - l_dmo_sub
+        elif lab == "DM":
+            n_max = n_dm_sub
+            n_dis = dis_n_dm_sub
+            l = (nsnaps - root_dm_sub) - l_dm_sub
+        elif lab == "DM+Baryons":
+            n_max = n_dmbary_sub
+            n_dis = dis_n_dmbary_sub
+            l = (nsnaps - root_dmbary_sub) - l_dmbary_sub
+        else:
+            print("Something is very wrong")
+            break
+
+        # Remove halos that persist
+        okinds = l > 0
+        n_max = n_max[okinds]
+        n_dis = n_dis[okinds]
+        l = l[okinds]
+
+        # Plot the hexbin in this panel
+        im = ax.hexbin(n_max, n_dis, gridsize=50, mincnt=1, C=l,
+                       reduce_C_function=np.mean, linewidths=0.2,
+                       norm=norm, cmap="magma")
+
+        # Label x axis
+        ax.set_xlabel(r"$N_{\mathrm{peak}}$")
+
+        # Label panel
+        ax.text(0.05, 0.8, lab,
+                bbox=dict(boxstyle="round,pad=0.3", fc='w',
+                          ec="k", lw=1, alpha=0.8),
+                transform=ax.transAxes,
+                horizontalalignment='left')
+
+        # Get limits
+        if ax.get_xlim()[0] < min_lim:
+            min_lim = ax.get_xlim()[0]
+        if ax.get_ylim()[0] < min_lim:
+            min_lim = ax.get_ylim()[0]
+        if ax.get_xlim()[1] > max_lim:
+            max_lim = ax.get_xlim()[1]
+        if ax.get_ylim()[1] > max_lim:
+            max_lim = ax.get_ylim()[1]
+
+    # Set y label
+    ax1.set_ylabel(r"$N_{\mathrm{dis}}$")
+
+    # Set ax limits
+    for ax in [ax1, ax2, ax3]:
+        ax.set_xlim(min_lim, max_lim)
+        ax.set_ylim(min_lim, max_lim)
+
+    # Remove unrequired axes
+    ax2.tick_params("y", left=False, right=False, labelleft=False,
+                    labelright=False)
+    ax3.tick_params("y", left=False, right=False, labelleft=False,
+                    labelright=False)
+
+    cbar = fig.colobar(im)
+    cbar.set_label(r"$\bar{\ell}_{p}$")
+
+    # Save figure with a transparent background
+    fig.savefig('plots/sub_disappear_mass.png', bbox_inches="tight")
     plt.close(fig)
 
 
