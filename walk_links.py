@@ -175,6 +175,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
     root_snaps = np.array(root_snaps)
     lengths = np.array(lengths)
     max_nparts = np.array(max_nparts)
+    dis_nparts = np.array(dis_nparts)
     max_snaps = np.array(max_snaps)
 
     return root_snaps, lengths, max_nparts, max_snaps, dis_nparts
