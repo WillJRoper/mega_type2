@@ -165,7 +165,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
                 # Decement snapshot
                 snap += 1
 
-            if npart >= 500 and (100 - root_snap) - length > 0:
+            if npart >= 500 and (99 - root_snap) - length > 0:
                 print("Anomalous halo %d in snap %s" % (ihalo,
                                                         str(snap
                                                             - 1).zfill(4)))
