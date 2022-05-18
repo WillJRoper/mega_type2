@@ -114,6 +114,11 @@ def get_persist_lengths(reals, nparts, progs, descs):
     dis_nparts = []
     max_snaps = []
 
+    # Create done dictionary
+    done_halos = {}
+    for snap in range(0, 99):
+        done_halos[snap] = np.zeros(len(descs[snap]), dtype=bool)
+
     # Loop over snapshots
     for root_snap in range(0, 99):
 
@@ -131,7 +136,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
                 continue
 
             # Skip if this halo has already appeared in a main branch
-            if (root_snap, ihalo) in done_halos:
+            if done_halos[snap][ihalo]:
                 continue
 
             # Initialise looping variables
@@ -156,7 +161,7 @@ def get_persist_lengths(reals, nparts, progs, descs):
                     max_snap = snap
 
                 # Include this halo in done halos
-                done_halos.update({(snap, desc), })
+                done_halos[snap][desc] = True
 
                 # Get this halos direct progenitor
                 prev_halo = desc
