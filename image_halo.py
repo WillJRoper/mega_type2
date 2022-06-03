@@ -10,7 +10,7 @@ def make_img():
     simpath = "../runs/L0100N0285/data/L0100N0285_DMO_"
     halo = 67278
     snaps = ["0092", "0093", "0094"]
-    width = 0.2  # cMpc
+    width = 1  # cMpc
     soft = 0.01754385964
 
     # Get this halos data from the halo file
