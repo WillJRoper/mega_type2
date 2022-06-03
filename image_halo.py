@@ -60,7 +60,7 @@ def make_img():
 
         # Get this halos data from this snapshot
         hdf = h5py.File(path.replace("0092", snap), "r")
-        halos_ids = hdf.attrs["particle_halo_IDs"][...]
+        halo_ids = hdf["particle_halo_IDs"][...]
         all_sim_pids = hdf["all_sim_part_ids"][...]
         hdf.close()
 
