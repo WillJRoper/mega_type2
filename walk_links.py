@@ -297,8 +297,9 @@ def main_branch_length():
             ls = l[okinds]
 
             H, _ = np.histogram(ls, bins=bin_edges)
+            H /= np.sum(H)
 
-            ax.plot(bin_edges[:-1] + 0.5, H / np.sum(H), label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
@@ -377,8 +378,9 @@ def main_branch_length():
             ls = l[okinds]
 
             H, _ = np.histogram(ls, bins=bin_edges)
+            H /= np.sum(H)
 
-            ax.plot(bin_edges[:-1] + 0.5, H / np.sum(H), label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
@@ -540,8 +542,9 @@ def persist_length():
                      l[not_okinds].size, l[okinds].size))
 
             H, _ = np.histogram(ls, bins=bin_edges)
+            H /= np.sum(H)
 
-            ax.plot(bin_edges[:-1] + 0.5, H / np.sum(H), label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
@@ -632,8 +635,9 @@ def persist_length():
                      l[not_okinds].size, l[okinds].size))
 
             H, _ = np.histogram(ls, bins=bin_edges)
+            H /= np.sum(H)
 
-            ax.plot(bin_edges[:-1] + 0.5, H / np.sum(H), label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
