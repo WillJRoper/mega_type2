@@ -119,6 +119,11 @@ def get_persist_lengths(reals, nparts, progs, descs):
     for snap in range(0, 99):
         done_halos[snap] = np.zeros(len(descs[snap]), dtype=bool)
 
+    # Create set to store finish points to avoid double counting
+    finish_points = {}
+    for snap in range(0, 99):
+        finish_points[snap] = np.zeros(len(descs[snap]), dtype=bool)
+
     # Loop over snapshots
     for root_snap in range(0, 99):
 
@@ -178,11 +183,15 @@ def get_persist_lengths(reals, nparts, progs, descs):
                          (99 - root_snap) - length))
 
             # Appended this halos persistence length
-            root_snaps.append(root_snap)
-            lengths.append(length)
-            max_nparts.append(max_npart)
-            dis_nparts.append(npart)
-            max_snaps.append(max_snap)
+            if not finish_points[snap - 1][prev_halo]:
+                root_snaps.append(root_snap)
+                lengths.append(length)
+                max_nparts.append(max_npart)
+                dis_nparts.append(npart)
+                max_snaps.append(max_snap)
+
+            # Include halo in finish points
+            finish_points[snap - 1][prev_halo] = True
 
     # Convert to arrays
     root_snaps = np.array(root_snaps)
