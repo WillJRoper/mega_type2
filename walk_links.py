@@ -298,7 +298,7 @@ def main_branch_length():
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
-            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H / np.sum(H), label=lab, color=c)
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
@@ -307,7 +307,7 @@ def main_branch_length():
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
-    ax2.set_ylabel(r'$N$')
+    ax2.set_ylabel(r'PDF')
 
     # Annotate the mass bins
     ax1.text(0.05, 0.8, r'$N_{p}>1000$',
@@ -378,7 +378,7 @@ def main_branch_length():
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
-            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H / np.sum(H), label=lab, color=c)
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
@@ -387,7 +387,7 @@ def main_branch_length():
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
-    ax2.set_ylabel(r'$N$')
+    ax2.set_ylabel(r'PDF')
 
     # Annotate the mass bins
     ax1.text(0.05, 0.8, r'$N_{p}>1000$',
@@ -541,7 +541,7 @@ def persist_length():
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
-            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H / np.sum(H), label=lab, color=c)
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
@@ -550,7 +550,7 @@ def persist_length():
 
     # Label axes
     ax3.set_xlabel(r'$\ell_{p}$')
-    ax2.set_ylabel(r'$N$')
+    ax2.set_ylabel(r'PDF')
 
     # Annotate the mass bins
     ax1.text(0.05, 0.8, r'$N_{p}>1000$',
@@ -633,7 +633,7 @@ def persist_length():
 
             H, _ = np.histogram(ls, bins=bin_edges)
 
-            ax.plot(bin_edges[:-1] + 0.5, H, label=lab, color=c)
+            ax.plot(bin_edges[:-1] + 0.5, H / np.sum(H), label=lab, color=c)
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
@@ -642,7 +642,7 @@ def persist_length():
 
     # Label axes
     ax3.set_xlabel(r'$\ell$')
-    ax2.set_ylabel(r'$N$')
+    ax2.set_ylabel(r'PDF')
 
     # Annotate the mass bins
     ax1.text(0.05, 0.8, r'$N_{p}>1000$',
