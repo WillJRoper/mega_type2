@@ -303,7 +303,7 @@ def main_branch_length():
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
-                ax.set_ylim(1, H_max + (0.2 * H_max))
+                ax.set_ylim(0, H_max + (0.2 * H_max))
             prev_max[i] = H_max
 
     # Label axes
@@ -384,7 +384,7 @@ def main_branch_length():
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
-                ax.set_ylim(1, H_max + (0.2 * H_max))
+                ax.set_ylim(0, H_max + (0.2 * H_max))
             prev_max[i] = H_max
 
     # Label axes
@@ -548,7 +548,7 @@ def persist_length():
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
-                ax.set_ylim(1, H_max + (0.2 * H_max))
+                ax.set_ylim(0, H_max + (0.2 * H_max))
             prev_max[i] = H_max
 
     # Label axes
@@ -641,7 +641,7 @@ def persist_length():
 
             H_max = np.max(H)
             if H_max > prev_max[i]:
-                ax.set_ylim(1, H_max + (0.2 * H_max))
+                ax.set_ylim(0, H_max + (0.2 * H_max))
             prev_max[i] = H_max
 
     # Label axes
