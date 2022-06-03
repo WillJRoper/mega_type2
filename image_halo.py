@@ -40,7 +40,7 @@ def make_img():
 
         # Define the center
         if snap == snaps[0]:
-            cent = pos[np.in1d(sim_pids, pids, :]
+            cent = pos[np.in1d(sim_pids, pids), :]
 
         # Shift and wrap the positions
         pos -= cent
@@ -48,7 +48,7 @@ def make_img():
         pos[pos > boxsize / 2] -= boxsize
 
         # Plot the background field
-        H, _, _=np.histogram2d(pos[:, 0], pos[:, 1],
+        H, _, _ = np.histogram2d(pos[:, 0], pos[:, 1],
                                  bins=int(width / soft),
                                  range=((-width / 2, width / 2),
                                         (-width / 2, width / 2)))
