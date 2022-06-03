@@ -15,11 +15,10 @@ def make_img():
 
     # Get this halos data from the halo file
     hdf = h5py.File(path, "r")
-    boxsize = hdf.attrs["boxsize"]
+    boxsize = hdf.attrs["boxsize"][0]
     begin = hdf["start_index"][halo]
     length = hdf["stride"][halo]
-    cent = hdf["mean_positions"][halo, :]
-    print(halo, begin, length, cent)
+    print(halo, begin, length)
     sim_pids = hdf["sim_part_ids"][begin: begin + length]
     hdf.close()
 
@@ -30,6 +29,7 @@ def make_img():
     ax3 = fig.add_subplot(133)
 
     # Loop over snaps
+    cent = np.array([0, 0, 0])
     for ax, snap in zip([ax1, ax2, ax3], snaps):
 
         # Get sim data
@@ -38,20 +38,24 @@ def make_img():
         pids = hdf["PartType1"]["ParticleIDs"][...]
         hdf.close()
 
+        # Define the center
+        if snap == snaps[0]:
+            cent = pos[np.in1d(sim_pids, pids, :]
+
         # Shift and wrap the positions
         pos -= cent
         pos[pos < -boxsize / 2] += boxsize
         pos[pos > boxsize / 2] -= boxsize
 
         # Plot the background field
-        H, _, _ = np.histogram2d(pos[:, 0], pos[:, 1],
+        H, _, _=np.histogram2d(pos[:, 0], pos[:, 1],
                                  bins=int(width / soft),
                                  range=((-width / 2, width / 2),
                                         (-width / 2, width / 2)))
 
         ax.imshow(H, extent=(-width / 2, width / 2, -width / 2, width / 2))
 
-    fig.savefig("plots/anomalous_halo_halo%d_snap%s.png" % (halo, snaps[-1]))
+    fig.savefig("plots/anomalous_halo_halo%d_snap%s.png" % (halo, snaps[0]))
 
 
 if __name__ == "__main__":
