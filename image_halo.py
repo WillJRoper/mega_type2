@@ -40,7 +40,7 @@ def make_img():
 
         # Define the center
         if snap == snaps[0]:
-            cent = pos[np.in1d(pids, sim_pids), :]
+            cent = np.mean(pos[np.in1d(pids, sim_pids), :], axis=0)
 
         # Shift and wrap the positions
         pos -= cent
