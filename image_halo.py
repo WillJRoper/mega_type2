@@ -38,9 +38,12 @@ def make_img():
         pids = hdf["PartType1"]["ParticleIDs"][...]
         hdf.close()
 
+        # Get indices of halo particles
+        halo_inds = np.in1d(pids, sim_pids)
+
         # Define the center
         if snap == snaps[0]:
-            cent = np.mean(pos[np.in1d(pids, sim_pids), :], axis=0)
+            cent = np.mean(pos[halo_inds, :], axis=0)
 
         # Shift and wrap the positions
         pos -= cent
@@ -54,6 +57,18 @@ def make_img():
                                         (-width / 2, width / 2)))
 
         ax.imshow(H, extent=(-width / 2, width / 2, -width / 2, width / 2))
+
+        # Get this halos data from this snapshot
+        hdf = h5py.File(path.replace("0092", snap), "r")
+        halos_ids = hdf.attrs["particle_halo_IDs"][...]
+        all_sim_pids = hdf["all_sim_part_ids"][...]
+        hdf.close()
+
+        # Get indices of halo particles
+        halo_inds = np.in1d(all_sim_pids, sim_pids)
+        part_halo_ids = halo_ids[halo_inds]
+
+        print(snap, np.unique(part_halo_ids, return_counts=True))
 
     fig.savefig("plots/anomalous_halo_halo%d_snap%s.png" % (halo, snaps[0]))
 
