@@ -66,6 +66,7 @@ def make_img():
 
         # Get indices of halo particles
         halo_inds = np.in1d(all_sim_pids, sim_pids)
+        print(sim_pids)
         part_halo_ids = halo_ids[halo_inds]
 
         print(snap, np.unique(part_halo_ids, return_counts=True))
