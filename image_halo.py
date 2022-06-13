@@ -8,10 +8,10 @@ def make_img():
     # Define constants
     path = "../graphs/L0100N0285_DMO/data/halos/DMO_halos_0092.hdf5"
     simpath = "../runs/L0100N0285/data/L0100N0285_DMO_"
-    halo = 67278
+    halo = 43912
     snaps = ["0092", "0093", "0094"]
     width = 1  # cMpc
-    soft = 0.01754385964
+    soft = 0.01403508771
 
     # Get this halos data from the halo file
     hdf = h5py.File(path, "r")
@@ -44,6 +44,8 @@ def make_img():
         # Define the center
         if snap == snaps[0]:
             cent = np.mean(pos[halo_inds, :], axis=0)
+
+        print(cent, boxsize)
 
         # Shift and wrap the positions
         pos -= cent
