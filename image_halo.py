@@ -18,7 +18,8 @@ def make_img():
     boxsize = hdf.attrs["boxsize"][0]
     begin = hdf["start_index"][halo]
     length = hdf["stride"][halo]
-    print(halo, begin, length)
+    cent = hdf["mean_position"][halo]
+    print(halo, begin, length, cent)
     sim_pids = hdf["sim_part_ids"][begin: begin + length]
     hdf.close()
 
